@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
+
 android {
     namespace = "com.example.jettrivia"
     compileSdk = 34
@@ -54,7 +55,7 @@ android {
 dependencies {
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.converter.gson)
+    implementation(libs.retrofit2.converter.gson)
 
     // Hilt
     implementation(libs.hilt.android)
