@@ -8,6 +8,29 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class QuestionRepository @Inject constructor(private val api: QuestionApi) {
+    companion object {
+        val defaultList = listOf(
+            QuestionModel(
+                "question 1",
+                "category",
+                "anwser",
+                listOf("option1", "option2", "option3", "option4")
+            ),
+            QuestionModel(
+                "question 2",
+                "category",
+                "anwser",
+                listOf("option1", "option2", "option3", "option4")
+            ),
+            QuestionModel(
+                "question 3",
+                "category",
+                "anwser",
+                listOf("option1", "option2", "option3", "option4")
+            )
+        )
+    }
+
     private val listOfQuestions = DataOrException<List<QuestionModel>, Boolean, Exception>()
 
     suspend fun getAllQuestions(): DataOrException<List<QuestionModel>, Boolean, Exception> {
