@@ -13,7 +13,7 @@ class QuestionRepository @Inject constructor(private val api: QuestionApi) {
             QuestionModel(
                 "question 1",
                 "category",
-                "anwser",
+                "option1",
                 listOf("option1", "option2", "option3", "option4")
             ),
             QuestionModel(

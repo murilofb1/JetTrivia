@@ -3,6 +3,8 @@ package com.example.jettrivia
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jettrivia.repository.QuestionRepository
+import com.example.jettrivia.screens.home.HomeEvents
+import com.example.jettrivia.screens.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,9 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: QuestionRepository) : ViewModel() {
-    private val _state = MutableStateFlow(MainState())
+    private val _state = MutableStateFlow(HomeState())
     val state = _state.asStateFlow()
-    private val eventListener = MutableSharedFlow<MainEvents>()
+    private val eventListener = MutableSharedFlow<HomeEvents>()
 
     init {
         viewModelScope.launch() {
@@ -28,7 +30,7 @@ class MainViewModel @Inject constructor(private val repository: QuestionReposito
         handleEvents()
     }
 
-    fun onEvent(event: MainEvents) {
+    fun onEvent(event: HomeEvents) {
         viewModelScope.launch {
             eventListener.emit(event)
         }
@@ -38,14 +40,25 @@ class MainViewModel @Inject constructor(private val repository: QuestionReposito
         viewModelScope.launch {
             eventListener.collect {
                 when (it) {
-                    is MainEvents.NextQuestion -> moveToNextQuestion()
+                    is HomeEvents.NextQuestion -> moveToNextQuestion()
+                    is HomeEvents.SelectAnswer -> selectAnswer(it.index)
                 }
             }
         }
 
     }
 
+    private fun selectAnswer(index: Int) {
+            _state.update { it.copy(selectedChoice = index, correctAnswer = _state.value.checkAnswer(index)) }
+    }
+
     private fun moveToNextQuestion() =
-        _state.update { it.copy(currentQuestionId = it.currentQuestionId + 1) }
+        _state.update {
+            it.copy(
+                currentQuestionId = it.currentQuestionId + 1,
+                selectedChoice = null,
+                correctAnswer = false
+            )
+        }
 
 }
