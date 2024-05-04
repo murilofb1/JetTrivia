@@ -13,8 +13,7 @@ O app busca as questões através de um repositório e a cada acerto o usuário 
 
 <p align ="center">
   <img src="https://github.com/murilofb1/JetTrivia/assets/74936314/c2f2bc58-dce1-4222-9ef3-11d2aabf301c" width="200"/>
-  <img src="https://github.com/murilofb1/JetTrivia/assets/74936314/0805f680-d636-4280-a2ca-857cf45c5cbd
-" width="200"/>  
+  <img src="https://github.com/murilofb1/JetTrivia/assets/74936314/0805f680-d636-4280-a2ca-857cf45c5cbd" width="200"/>  
 </p>
 
 ### Recursos externos utilizados
