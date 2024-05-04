@@ -5,6 +5,9 @@ import androidx.compose.ui.graphics.Color
 object JetTriviaColors {
     val stroke = Color(0xFF22405E)
     val backGround = Color(0xff232840)
+    val mLightBlue = Color(0xff1572EC)
+    val progressBarStart = Color (0xfff95075)
+    val progressBarEnd = Color (0xffbe6be5)
 }
 
 val Purple80 = Color(0xFFD0BCFF)

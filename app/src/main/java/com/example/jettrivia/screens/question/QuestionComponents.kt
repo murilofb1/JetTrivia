@@ -9,18 +9,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.jettrivia.components.JetTriviaRadioButton
 import com.example.jettrivia.repository.QuestionRepository
 import com.example.jettrivia.screens.home.HomeState
@@ -45,12 +39,16 @@ fun Choices(
                     shape = RoundedCornerShape(15.dp)
                 )
             ) {
+
                 JetTriviaRadioButton(
                     isSelected = index == state.selectedChoice,
                     onClick = { onItemClick(index) },
                     text = choice,
                     selectedColor = if (state.correctAnswer) Color.Green.copy(alpha = 0.2f)
-                    else Color.Red.copy(alpha = 0.2f)
+                    else Color.Red.copy(alpha = 0.2f),
+                    textColor = if (state.selectedChoice == index && state.correctAnswer) Color.Green
+                    else if (state.selectedChoice == index) Color.Red
+                    else Color.Unspecified
                 )
             }
 
@@ -76,9 +74,9 @@ fun HeaderPreview() {
 }
 
 @Composable
-fun QuestionsHeader(currentQuestion: Int, totalQuestions: Int) {
+fun QuestionsHeader(modifier: Modifier = Modifier, currentQuestion: Int, totalQuestions: Int) {
     Text(
-        modifier = Modifier.padding(15.dp),
+        modifier = modifier,
         text = buildAnnotatedString {
             withStyle(QuestionsHeaderSpan1) { append("Question $currentQuestion/") }
             withStyle(QuestionsHeaderSpan2) { append("$totalQuestions") }

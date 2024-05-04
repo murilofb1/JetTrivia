@@ -1,5 +1,6 @@
 package com.example.jettrivia.screens.home
 
+import android.util.Log
 import com.example.jettrivia.data.DataOrException
 import com.example.jettrivia.models.QuestionModel
 
@@ -11,7 +12,9 @@ data class HomeState(
     val selectedChoice: Int? = null,
     val correctAnswer: Boolean = false
 ) {
-
+    fun getProgress(): Float {
+        return (currentQuestionId.toFloat() / getTotalQuestions().toFloat())
+    }
 
     fun getCurrentQuestion(): QuestionModel? =
         questionsDoe.data?.get(currentQuestionId)

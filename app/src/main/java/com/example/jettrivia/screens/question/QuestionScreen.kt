@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jettrivia.components.DottedDivider
 import com.example.jettrivia.components.JetTriviaButton
+import com.example.jettrivia.components.JetTriviaProgressBar
 import com.example.jettrivia.repository.QuestionRepository
 import com.example.jettrivia.screens.home.HomeEvents
 import com.example.jettrivia.screens.home.HomeState
@@ -26,15 +27,20 @@ fun QuestionScreen(
     onEvent: (HomeEvents) -> Unit = {}
 ) {
     //val question = QuestionRepository.defaultList[0]
-      val question = state.getCurrentQuestion()!!
+    val question = state.getCurrentQuestion()!!
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(5.dp)
     ) {
         Column {
+            JetTriviaProgressBar(
+                modifier = Modifier.padding(top = 3.dp),
+                progress = state.getProgress()
+            )
             QuestionsHeader(
-                currentQuestion = state.currentQuestionId,
+                modifier = Modifier.padding(start = 15.dp, end = 15.dp, bottom = 15.dp, top = 5.dp),
+                currentQuestion = state.currentQuestionId + 1,
                 totalQuestions = state.getTotalQuestions()
             )
             DottedDivider()
@@ -68,6 +74,5 @@ fun QuestionScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewQuestionScreen() {
-
     QuestionScreen()
 }

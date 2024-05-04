@@ -23,7 +23,8 @@ val JetTriviaColorScheme = darkColorScheme(
     secondary = PurpleGrey80,
     tertiary = Pink80,
     surface = JetTriviaColors.backGround,
-    onSurface = Color.White
+    onSurface = Color.White,
+    onPrimary =Color.White
 )
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
